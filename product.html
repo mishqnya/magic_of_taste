@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товар | Магия вкуса</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/adaptive.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48.png">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container">
+
+        <nav class="navbar">
+
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="">
+            </a>
+
+            <ul class="menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="cakes.html">Торты</a></li>
+                <li><a href="bakery.html">Выпечка</a></li>
+                <li><a href="desserts.html">Десерты</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+            </ul>
+
+        </nav>
+
+    </div>
+</header>
+
+<section class="product">
+
+<div class="container">
+
+<div class="product-box">
+
+<!-- Левая колонка -->
+
+<div class="product-left">
+
+<div class="product-image">
+<img id="productImage" src="" alt="">
+</div>
+
+<div class="product-about">
+
+<h2>Описание</h2>
+
+<p class="product-description" id="productDescription"></p>
+
+<h2>Почему выбирают нас</h2>
+
+<div class="advantages">
+
+<div class="advantage">
+🌿 <span>Свежие натуральные ингредиенты</span>
+</div>
+
+<div class="advantage">
+🎂 <span>Полностью ручная работа</span>
+</div>
+
+<div class="advantage">
+✨ <span>Индивидуальный подход к каждому заказу</span>
+</div>
+
+<div class="advantage">
+🍓 <span>Большой выбор начинок и вкусов</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Правая колонка -->
+
+<div class="product-info">
+
+<h1 id="productName"></h1>
+
+<div class="product-price">
+<span id="productPrice"></span>
+</div>
+
+<p class="price-note">
+Стоимость может меняться в зависимости от веса, начинки и оформления.
+</p>
+
+<!-- Вес -->
+
+<div class="weight" id="weightBlock">
+
+<h3>Вес</h3>
+
+<div class="weight-box">
+
+<button id="minus">−</button>
+
+<span id="weightValue">1 кг</span>
+
+<button id="plus">+</button>
+
+</div>
+
+</div>
+
+<!-- Количество -->
+
+<div class="weight" id="countBlock" style="display:none;">
+
+<h3>Количество</h3>
+
+<div class="weight-box">
+
+<button id="countMinus">−</button>
+
+<span id="countValue">1</span>
+
+<button id="countPlus">+</button>
+
+</div>
+
+</div>
+
+<!-- Начинка -->
+
+<div class="field" id="fillingBlock">
+
+<h3>Начинка</h3>
+
+<select id="filling"></select>
+
+</div>
+
+<!-- Надпись -->
+
+<div class="field" id="textBlock">
+
+<h3>Надпись</h3>
+
+<input
+id="cakeText"
+type="text"
+placeholder="Например: С Днём рождения!"
+>
+
+</div>
+
+<!-- Комментарий -->
+
+<div class="field" id="wishBlock">
+
+<h3>Пожелания</h3>
+
+<textarea
+id="cakeWish"
+placeholder="Напишите ваши пожелания"
+></textarea>
+
+</div>
+
+<!-- Фото -->
+
+<div class="field" id="photoBlock">
+
+<h3>Прикрепить фото</h3>
+
+<input id="cakePhoto" type="file">
+
+</div>
+
+<button class="buy-btn" id="addCart">
+Добавить в корзину
+</button>
+
+<p class="order-note">
+💡 После оформления заказа мы свяжемся с вами для уточнения деталей.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<script src="js/cakes.js"></script>
+<script src="js/bakery.js"></script>
+<script src="js/desserts.js"></script>
+<script src="js/product.js"></script>
+
+</body>
+</html>
