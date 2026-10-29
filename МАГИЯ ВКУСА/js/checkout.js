@@ -4,7 +4,7 @@ const cart = JSON.parse(localStorage.getItem("cart")) || [];
 const orderList = document.getElementById("orderList");
 const orderTotal = document.getElementById("orderTotal");
 
-const VK_LINK = "https://vk.ru/themagicoftaste44";
+const VK_LINK = "https://vk.ru/im?sel=-237265900";
 
 let total = 0;
 
