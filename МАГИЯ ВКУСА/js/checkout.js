@@ -30,7 +30,7 @@ if (cart.length === 0) {
     orderTotal.textContent = "от " + total + " ₽";
 }
 
-document.getElementById("confirmOrder").onclick = async () => {
+document.getElementById("confirmOrder").onclick = () => {
     const name = document.getElementById("clientName").value.trim();
     const phone = document.getElementById("clientPhone").value.trim();
     const date = document.getElementById("clientDate").value;
@@ -46,12 +46,12 @@ document.getElementById("confirmOrder").onclick = async () => {
         return;
     }
 
-    const products = cart.map((item, index) => `
-${index + 1}. ${item.name}
+    const products = cart.map((item, index) => {
+        return `${index + 1}. ${item.name}
 Вес: ${item.weight} кг
 Начинка: ${item.filling}
-Цена: от ${item.price} ₽/кг
-`).join("\n");
+Цена: от ${item.price} ₽/кг`;
+    }).join("\n\n");
 
     const orderText = `Здравствуйте! Хочу оформить заказ в «Магии вкуса» ❤️
 
@@ -67,22 +67,63 @@ ${products}
 
 Пожалуйста, подтвердите заказ!`;
 
-    // Открываем сообщество VK
-    window.open(VK_LINK, "_blank");
+    // Показываем текст заказа в отдельном окне
+    const orderWindow = window.open("", "_blank");
 
-    try {
-        await navigator.clipboard.writeText(orderText);
+    if (orderWindow) {
+        orderWindow.document.write(`
+            <!DOCTYPE html>
+            <html lang="ru">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Ваш заказ — Магия вкуса</title>
+            </head>
+            <body style="font-family:Arial,sans-serif;max-width:650px;margin:30px auto;padding:20px;">
+                <h2>Ваш заказ готов! ❤️</h2>
+                <p>Нажмите «Скопировать заказ», затем перейдите в VK и вставьте текст в переписку.</p>
+                <textarea id="orderText" readonly
+                    style="width:100%;height:300px;box-sizing:border-box;padding:12px;font-size:15px;"></textarea>
+                <br><br>
+                <button id="copyButton" style="padding:12px 20px;cursor:pointer;">
+                    Скопировать заказ
+                </button>
+                <button id="vkButton" style="padding:12px 20px;cursor:pointer;">
+                    Открыть переписку VK
+                </button>
+                <p id="status"></p>
+                <script>
+                    const text = ${JSON.stringify(orderText)};
+                    const area = document.getElementById("orderText");
+                    area.value = text;
 
-        alert(
-            "Текст заказа скопирован!\n\n" +
-            "В открывшемся ВКонтакте зайдите в сообщения сообщества, " +
-            "вставьте текст и нажмите «Отправить»."
-        );
-    } catch (error) {
-        // Если автоматическое копирование недоступно
-        prompt(
-            "Скопируйте текст заказа и отправьте его в сообщении ВКонтакте:",
-            orderText
-        );
+                    document.getElementById("copyButton").onclick = async () => {
+                        area.focus();
+                        area.select();
+
+                        try {
+                            await navigator.clipboard.writeText(text);
+                            document.getElementById("status").textContent =
+                                "Заказ скопирован! Теперь вставьте его в VK сочетанием Ctrl + V.";
+                        } catch (e) {
+                            const copied = document.execCommand("copy");
+                            document.getElementById("status").textContent = copied
+                                ? "Заказ скопирован! Теперь вставьте его в VK сочетанием Ctrl + V."
+                                : "Выделите текст в поле и нажмите Ctrl + C.";
+                        }
+                    };
+
+                    document.getElementById("vkButton").onclick = () => {
+                        window.open(${JSON.stringify(VK_LINK)}, "_blank");
+                    };
+                <\/script>
+            </body>
+            </html>
+        `);
+
+        orderWindow.document.close();
+    } else {
+        // Если браузер заблокировал новое окно
+        prompt("Скопируйте текст заказа сочетанием Ctrl + C:", orderText);
     }
 };
